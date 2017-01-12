@@ -42,7 +42,7 @@ module.exports = function(passport) {
                         newUser.local.password = newUser.generateHash(password);
                         newUser.local.firstName = req.body.firstName;
                         newUser.local.lastName = req.body.lastName;
-                        newUser.local.role = 'user';
+                        newUser.local.role = 'admin';
                         newUser.local.userName = req.body.userName;
 
                         // save the user
@@ -74,7 +74,7 @@ module.exports = function(passport) {
                 if (!user) return done(null, false, req.flash('loginMessage', 'User not found.'));
 
                 // User found - password wrong
-                if (!user.validPassword(password)) return done(null, false, req.flash('loginMessage', 'Wrong password.'));
+                if (!user.validPassword(password)) return done(null, false, req.flash('loginMessage', 'Incorrect password.'));
 
                 // all well , return user
                 return done(null, user);
